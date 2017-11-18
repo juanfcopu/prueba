@@ -19,10 +19,10 @@ type
     Button1: TButton;
     Label1: TLabel;
     FDPhysMySQLDriverLink1: TFDPhysMySQLDriverLink;
-    FDGUIxLoginDialog1: TFDGUIxLoginDialog;
     FDUpdateSQL1: TFDUpdateSQL;
     DBGrid1: TDBGrid;
     DataSource1: TDataSource;
+    StringGrid1: TStringGrid;
     procedure Button1Click(Sender: TObject);
     procedure FDConnection1AfterConnect(Sender: TObject);
   private

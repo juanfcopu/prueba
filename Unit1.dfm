@@ -14,8 +14,8 @@ object Form1: TForm1
   PixelsPerInch = 96
   TextHeight = 13
   object Label1: TLabel
-    Left = 320
-    Top = 160
+    Left = 456
+    Top = 16
     Width = 31
     Height = 13
     Caption = 'Label1'
@@ -30,8 +30,8 @@ object Form1: TForm1
     OnClick = Button1Click
   end
   object DBGrid1: TDBGrid
-    Left = 192
-    Top = 225
+    Left = 224
+    Top = 97
     Width = 625
     Height = 272
     DataSource = DataSource1
@@ -42,6 +42,13 @@ object Form1: TForm1
     TitleFont.Name = 'Tahoma'
     TitleFont.Style = []
   end
+  object StringGrid1: TStringGrid
+    Left = 224
+    Top = 392
+    Width = 625
+    Height = 113
+    TabOrder = 2
+  end
   object FDConnection1: TFDConnection
     Params.Strings = (
       'User_Name=juanfcopu'
@@ -50,11 +57,10 @@ object Form1: TForm1
       'Server=DELLDEBIAN'
       'DriverID=MySQL')
     Connected = True
-    LoginDialog = FDGUIxLoginDialog1
     LoginPrompt = False
     AfterConnect = FDConnection1AfterConnect
-    Left = 568
-    Top = 120
+    Left = 96
+    Top = 72
   end
   object FDQuery1: TFDQuery
     Active = True
@@ -64,20 +70,15 @@ object Form1: TForm1
     UpdateObject = FDUpdateSQL1
     SQL.Strings = (
       'select * from clientes')
-    Left = 704
-    Top = 144
+    Left = 40
+    Top = 16
   end
   object FDPhysMySQLDriverLink1: TFDPhysMySQLDriverLink
     VendorLib = 
       'C:\Users\Public\Documents\Embarcadero\Studio\Projects\FIRED\libm' +
       'ysql.dll'
-    Left = 400
-    Top = 32
-  end
-  object FDGUIxLoginDialog1: TFDGUIxLoginDialog
-    Provider = 'Forms'
-    Left = 56
-    Top = 40
+    Left = 96
+    Top = 24
   end
   object FDUpdateSQL1: TFDUpdateSQL
     Connection = FDConnection1
@@ -123,7 +124,7 @@ object Form1: TForm1
   end
   object DataSource1: TDataSource
     DataSet = FDQuery1
-    Left = 224
-    Top = 160
+    Left = 24
+    Top = 72
   end
 end
