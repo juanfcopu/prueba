@@ -1,17 +1,18 @@
 ﻿[Button1]
-Coordinates=153,10,53,51
+Coordinates=164,339,53,51
 
 [Label1]
-Coordinates=97,10,46,51
+Coordinates=10,339,46,51
 
 [FDUpdateSQL1]
 Coordinates=211,105,89,33
 
 [FDQuery1]
-Coordinates=10,10,77,285
+Coordinates=10,10,110,501
+Visible=False
 
 [DBGrid1]
-Coordinates=216,10,56,33
+Coordinates=470,340,56,33
 
 [FDPhysMySQLDriverLink1]
 Coordinates=192,209,144,33
@@ -23,8 +24,29 @@ Coordinates=96,1,77,285
 Coordinates=282,10,90,33
 
 []
-Coordinates=192,53,117,33
+Coordinates=490,0,92,285
+Visible=True
 
-[StringGrid1]
-Coordinates=106,80,70,51
+[BindSourceDB1]
+Coordinates=10,10,110,501
+
+[DBText1]
+Coordinates=82,339,56,51
+
+[TreeView1]
+Coordinates=243,339,65,33
+ExplicitSubNodes=
+
+[BindingsList1]
+Coordinates=135,311,91,36
+
+[ListView1]
+Coordinates=200,20,97,195
+
+[FDQuery2]
+Coordinates=410,150,63,33
+Visible=True
+
+[BindSourceDB2]
+Coordinates=390,120,110,267
 

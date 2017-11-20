@@ -10,7 +10,9 @@ uses
   FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt,
   FireDAC.Comp.Client, Data.DB, FireDAC.Comp.DataSet, Vcl.StdCtrls,
   FireDAC.VCLUI.Login, Vcl.Grids, Vcl.DBGrids, FireDAC.Comp.UI,
-  FireDAC.VCLUI.Wait;
+  FireDAC.VCLUI.Wait, Data.Bind.EngExt, Vcl.Bind.DBEngExt, Vcl.Bind.Grid,
+  System.Rtti, System.Bindings.Outputs, Vcl.Bind.Editors, Vcl.DBCtrls,
+  Data.Bind.Components, Data.Bind.Grid, Data.Bind.DBScope, Vcl.ComCtrls;
 
 type
   TForm1 = class(TForm)
@@ -22,7 +24,16 @@ type
     FDUpdateSQL1: TFDUpdateSQL;
     DBGrid1: TDBGrid;
     DataSource1: TDataSource;
-    StringGrid1: TStringGrid;
+    BindSourceDB1: TBindSourceDB;
+    DBText1: TDBText;
+    TreeView1: TTreeView;
+    BindingsList1: TBindingsList;
+    LinkFillControlToField: TLinkFillControlToField;
+    LinkFillControlToField2: TLinkFillControlToField;
+    ListView1: TListView;
+    FDQuery2: TFDQuery;
+    BindSourceDB2: TBindSourceDB;
+    LinkListControlToField2: TLinkListControlToField;
     procedure Button1Click(Sender: TObject);
     procedure FDConnection1AfterConnect(Sender: TObject);
   private
