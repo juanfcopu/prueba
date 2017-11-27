@@ -1,14 +1,14 @@
 ﻿[Button1]
-Coordinates=152,658,53,51
+Coordinates=10,537,53,51
 
 [Label1]
-Coordinates=508,116,46,51
+Coordinates=850,130,46,51
 
 [FDUpdateSQL1]
 Coordinates=211,105,89,33
 
 [FDQuery1]
-Coordinates=154,10,110,519
+Coordinates=187,10,110,501
 Visible=False
 
 [FDPhysMySQLDriverLink1]
@@ -21,38 +21,102 @@ Coordinates=96,1,77,285
 Coordinates=282,10,90,33
 
 []
-Coordinates=10,658,97,195
+Coordinates=89,537,40,51
 Visible=True
 LayerNames=*
+ExplicitSubNodes=
 
 [BindSourceDB1]
-Coordinates=154,10,110,519
-
-[TreeView1]
-Coordinates=336,658,65,33
-ExplicitSubNodes=
+Coordinates=187,10,110,501
 
 [BindingsList1]
 Coordinates=135,311,91,36
 
 [ListView1]
-Coordinates=366,204,97,195
+Coordinates=10,163,97,195
 
 [FDQuery2]
-Coordinates=237,658,63,33
+Coordinates=372,547,63,33
 Visible=True
 
 [BindSourceDB2]
-Coordinates=641,10,92,231
+Coordinates=299,537,92,231
 Visible=True
 
 [Module Settings]
 ModelLayerNames=*
 
 [StringGrid1]
-Coordinates=838,57,70,51
+Coordinates=669,10,70,51
+Visible=True
+
+[FDQuery2id_cliente]
+Coordinates=35,503,111,33
+
+[FDQuery2telefono1]
+Coordinates=410,1,109,33
+
+[Timer1]
+Coordinates=45,70,48,33
+
+[FDQuery2telefono2]
+Coordinates=410,53,109,33
+
+[FDQuery2nombre]
+Coordinates=410,418,101,33
+
+[FDQuery2telefono3]
+Coordinates=410,470,109,33
+
+[FDQuery2mail]
+Coordinates=410,105,84,33
+
+[FDQuery2pta]
+Coordinates=410,157,79,33
+
+[Label2]
+Coordinates=227,537,46,51
+
+[DataSource2]
+Coordinates=374,209,77,177
+
+[DBGrid1]
+Coordinates=388,537,56,33
+
+[SpeedButton1]
+Coordinates=470,537,84,33
+
+[Label3]
+Coordinates=155,537,46,51
+
+[ComboBox1]
+Coordinates=323,94,84,105
 Visible=True
 
 [BindNavigator1]
-Coordinates=827,175,90,51
+Coordinates=659,121,90,51
+
+[FDQuery3]
+Coordinates=0,0,63,51
+
+[ButtonGroup1]
+Coordinates=82,1,84,33
+
+[ImageList1]
+Coordinates=82,53,68,33
+
+[HotKey1]
+Coordinates=82,53,56,33
+
+[HeaderControl1]
+Coordinates=335,1,91,33
+
+[ShellResources1]
+Coordinates=335,53,97,33
+
+[TrayIcon1]
+Coordinates=13,70,62,33
+
+[CustomizeDlg1]
+Coordinates=335,53,88,33
 

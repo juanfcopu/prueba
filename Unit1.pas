@@ -14,7 +14,9 @@ uses
   System.Rtti, System.Bindings.Outputs, Vcl.Bind.Editors, Vcl.DBCtrls,
   Data.Bind.Components, Data.Bind.Grid, Data.Bind.DBScope, Vcl.ComCtrls,
   Vcl.DBCGrids, Data.Bind.Controls, Vcl.ExtCtrls, Vcl.Buttons,
-  Vcl.Bind.Navigator;
+  Vcl.Bind.Navigator, Vcl.ButtonGroup, Vcl.ImgList, Vcl.Tabs, Vcl.DockTabSet,
+  Vcl.CustomizeDlg, Vcl.ShellAnimations, Vcl.MPlayer, Vcl.CategoryButtons,
+  VCLTee.TeCanvas, VCLTee.TeePenDlg;
 
 type
   TForm1 = class(TForm)
@@ -26,7 +28,6 @@ type
     FDUpdateSQL1: TFDUpdateSQL;
     DataSource1: TDataSource;
     BindSourceDB1: TBindSourceDB;
-    TreeView1: TTreeView;
     BindingsList1: TBindingsList;
     LinkFillControlToField: TLinkFillControlToField;
     LinkFillControlToField2: TLinkFillControlToField;
@@ -36,20 +37,55 @@ type
     LinkListControlToField2: TLinkListControlToField;
     LinkPropertyToFieldCaption2: TLinkPropertyToField;
     StringGrid1: TStringGrid;
-    LinkGridToDataSourceBindSourceDB2: TLinkGridToDataSource;
     BindNavigator1: TBindNavigator;
     Timer1: TTimer;
     Label2: TLabel;
+    FDQuery2pta: TStringField;
+    FDQuery2nombre: TStringField;
+    FDQuery2telefono1: TIntegerField;
+    FDQuery2telefono2: TIntegerField;
+    FDQuery2telefono3: TIntegerField;
+    FDQuery2mail: TStringField;
+    FDQuery2id_cliente: TIntegerField;
+    DBGrid1: TDBGrid;
+    DataSource2: TDataSource;
+    LinkGridToDataSourceBindSourceDB2: TLinkGridToDataSource;
+    SpeedButton1: TSpeedButton;
+    Label3: TLabel;
+    ComboBox1: TComboBox;
+    LinkFillControlToField3: TLinkFillControlToField;
+    FDQuery3: TFDQuery;
+    ButtonGroup1: TButtonGroup;
+    ImageList1: TImageList;
+    HotKey1: THotKey;
+    HeaderControl1: THeaderControl;
+    ShellResources1: TShellResources;
+    TrayIcon1: TTrayIcon;
+    CustomizeDlg1: TCustomizeDlg;
+    DockTabSet1: TDockTabSet;
+    PageControl1: TPageControl;
+    LabeledEdit1: TLabeledEdit;
+    ButtonPen1: TButtonPen;
+    ButtonColor1: TButtonColor;
+    ComboFlat1: TComboFlat;
+    CategoryButtons1: TCategoryButtons;
     procedure Button1Click(Sender: TObject);
     procedure FDConnection1AfterConnect(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
+    procedure StringGrid1FixedCellClick(Sender: TObject; ACol, ARow: Integer);
+    procedure ComboBox1KeyUp(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure Edit1KeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure SpeedButton1Click(Sender: TObject);
   private
     { Private declarations }
   public
      ultcambio:TDateTime;
-     procedure RefrescarDataSet;
+     procedure RefrescarDataSet(Modo:integer);
      function EstadoInsertEdit:boolean;
+     procedure haycambios(var cambios:boolean; ultfecha:TDateTime);
+
     { Public declarations }
   end;
 
@@ -59,6 +95,8 @@ Form1:TForm1;
 implementation
 
 {$R *.dfm}
+
+uses Unit2;
 
 procedure TForm1.Button1Click(Sender: TObject);
 begin
@@ -85,9 +123,11 @@ begin
      label2.Caption:=DateToStr(ultcambio);
 end;
 
-procedure TForm1.Timer1Timer(Sender: TObject);
-var qry: TFDQuery;   cambios:boolean;
+
+procedure TForm1.haycambios(var cambios:boolean;ultfecha:TDateTime);
+var qry: TFDQuery;
 begin
+     ultfecha:=ultcambio;
      qry:=TFDQuery.Create(Application);
      qry.Connection:=FDConnection1;
      qry.SQL.Clear;
@@ -98,17 +138,70 @@ begin
      qry.Params.ParamByName('ultcambio').asDateTime:=ultcambio;
      qry.Open;
      cambios:=(qry.RecordCount > 0);
-     if cambios then ultcambio:=qry.Fields[1].AsDateTime;
+     if cambios then  ultfecha:= qry.Fields[1].AsDateTime;
      qry.Close;
      qry.destroy;
+
+end;
+
+procedure TForm1.Timer1Timer(Sender: TObject);
+var  cambios:boolean;
+begin
+     haycambios(cambios,ultcambio);
+
      if cambios then
      begin
           timer1.enabled:=false;
-          RefrescarDataSet;
+          RefrescarDataSet(1);
      end;
 
 
 
+end;
+
+procedure TForm1.ComboBox1KeyUp(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+  var empiezo,longitud:integer;
+begin
+  empiezo:=ComboBox1.Selstart;
+  longitud:=ComboBox1.SelLength;
+
+  if (ord(key)=27) or (ord(key)=9) or (ord(key)=13) then (Sender as TCombobox).DroppedDown:=false
+  else
+  begin
+  linkGridToDataSourceBindSourceDB2.Active:=false;
+ linkFillControlToField3.Active:=false;
+  if length((Sender as TComboBox).Text) > 0 then
+  begin
+    FDQuery2.Filter:='nombre like '+quotedStr((Sender as TComboBox).Text+'%');
+    FDQuery2.Filtered:=true;
+    Combobox1.DroppedDown:=true;
+
+  end
+  else
+  FDQuery2.Filtered:=false;
+ if (ord(key)=08) then FDQuery2.First;
+ linkGridToDataSourceBindSourceDB2.Active:=true;
+ linkFillControlToField3.Active:=true;
+  ComboBox1.SelStart:=empiezo ;
+  ComboBox1.SelLength:=longitud;
+  end;
+end;
+
+
+procedure TForm1.Edit1KeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
+begin
+     linkGridToDataSourceBindSourceDB2.Active:=false;
+      if length((Sender as TEdit).Text) > 0 then
+      begin
+
+        FDQuery2.Filter:='nombre like '+quotedStr((Sender as TEdit).Text+'%');
+        FDQuery2.Filtered:=true;
+
+end
+else
+FDQuery2.Filtered:=false;
+linkGridToDataSourceBindSourceDB2.Active:=true;
 end;
 
 function TForm1.EstadoInsertEdit:boolean;
@@ -126,23 +219,54 @@ begin
 
 end;
 
-procedure TForm1.RefrescarDataSet;
-var i: integer;
+procedure TForm1.RefrescarDataSet(Modo:integer);
+var i: integer;  cambios:boolean;
 begin
      try
-     i:=0;
-     if not EstadoInsertEdit then
-        while (i < FDConnection1.DataSetCount) do
-         begin
-          //if not (FDConnection1.DataSets[i].State in [dsInsert,dsEdit]) then
+        i:=0;
+     case Modo of
+       0: begin
+          while (i < FDConnection1.DataSetCount) do
+          begin
+              FDConnection1.DataSets[i].Refresh;
+              i:=i+1;
+          end;
+          haycambios(cambios,ultcambio)
+          end;
+
+
+       1: begin
+          if not EstadoInsertEdit then
+          while (i < FDConnection1.DataSetCount) do
+          begin
           FDConnection1.DataSets[i].Refresh;
-
           i:=i+1;
-         end;
-
+          end;
+          end;
+     end;
      finally
      timer1.Enabled:=true;
      end;
+end;
+
+procedure TForm1.SpeedButton1Click(Sender: TObject);
+begin
+Tform2.Create(Application).Show;
+end;
+
+procedure TForm1.StringGrid1FixedCellClick(Sender: TObject; ACol,
+  ARow: Integer);
+ var i:integer ;
+begin
+    FDQuery2.IndexFieldNames:=FDQuery2.Fields[Acol].FieldName;
+
+    for i := 0 to ((Sender as TStringGrid).ColCount-1) do
+
+    (Sender as TStringGrid).Cols[i].Clear;
+
+         linkgridtodatasourcebindsourcedb2.Active:=false;
+         linkgridtodatasourcebindsourcedb2.Active:=true;   // actualizar GRID
+
 end;
 
 end.
